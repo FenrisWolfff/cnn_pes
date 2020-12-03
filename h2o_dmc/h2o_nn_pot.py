@@ -17,13 +17,6 @@ from tensorflow.keras.layers import Dense
 # In[3]:
 
 
-from tensorflow.compat.v1 import ConfigProto
-from tensorflow.compat.v1 import InteractiveSession
-
-config = ConfigProto()
-config.gpu_options.allow_growth = True
-session = InteractiveSession(config=config)
-
 
 # In[4]:
 
@@ -50,8 +43,7 @@ def h2o_pot(cds):
     model.compile(optimizer=optimizer,
                      loss='mse',
                      metrics=[])
-    model.load_weights('/home/fenris/McCoy_Group/conv/h2o_dmc/h2o_3x64.h5')
-    
+    model.load_weights('h2o_3x64.h5')
     internal_cds = internals_h2o(cds)
     norm_cds = 2*(internal_cds)/3-1
     pots_wn = (10**model.predict(norm_cds)).flatten()

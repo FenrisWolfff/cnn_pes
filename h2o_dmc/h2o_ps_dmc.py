@@ -17,9 +17,9 @@ from pyvibdmc import potential_manager as pm
 
 
 if __name__ == '__main__': #if using multiprocessing on windows / mac, you need to encapsulate using this line
-    pot_dir = '/' #this directory is part of the one you copied that is outside of pyvibdmc.
-    py_file = 'h2o_nn_pot.py'
-    pot_func = 'h2o_pot' # def water_pot(cds) in h2o_potential.py
+    pot_dir = 'sample_potentials/FortPots/Partridge_Schwenke_H2O/' #this directory is part of the one you copied that is outside of pyvibdmc.
+    py_file = 'h2o_potential.py'
+    pot_func = 'water_pot' # def water_pot(cds) in h2o_potential.py
 
     #The Potential object assumes you have already made a .so file and can successfully call it from Python
     water_pot = pm.Potential(potential_function=pot_func,
@@ -38,7 +38,7 @@ if __name__ == '__main__': #if using multiprocessing on windows / mac, you need 
 
     for sim_num in range(5):
         myDMC = dmc.DMC_Sim(sim_name=f"h2o_nn_{sim_num}",
-                              output_folder="h2o_nn_dmc_output",
+                              output_folder="h2o_ps_dmc_output",
                               weighting='discrete', #or 'continuous'. 'continuous' keeps the ensemble size constant.
                               num_walkers=20000, #number of geometries exploring the potential surface
                               num_timesteps=10000, #how long the simulation will go. (num_timesteps * delta_t atomic units of time)
