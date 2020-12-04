@@ -36,7 +36,7 @@ if __name__ == '__main__': #if using multiprocessing on windows / mac, you need 
                            [-0.45344658,  1.75233806,  0.        ],
                            [ 0.        ,  0.        ,  0.        ]]) * 1.01
 
-    for sim_num in range(5):
+    for sim_num in [4]:
         myDMC = dmc.DMC_Sim(sim_name=f"h2o_nn_{sim_num}",
                               output_folder="h2o_nn_dmc_output",
                               weighting='discrete', #or 'continuous'. 'continuous' keeps the ensemble size constant.

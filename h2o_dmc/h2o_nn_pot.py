@@ -48,9 +48,9 @@ def h2o_pot(cds):
     model.compile(optimizer=optimizer,
                      loss='mse',
                      metrics=[])
-    model.load_weights('h2o_3x64_1.h5')
+    model.load_weights('h2o_3x64.h5')
     internal_cds = internals_h2o(cds)
-    norm_cds = 2*(internal_cds)/3-1
+    norm_cds = 2*(internal_cds)/4-1
     pots_wn = (10**model.predict(norm_cds)).flatten()
     return Constants.convert(pots_wn, 'wavenumbers', to_AU=True)
 
