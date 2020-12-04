@@ -1,0 +1,109 @@
+!    -*- f90 -*-
+! Note: the context of this file is case sensitive.
+
+python module libCH5Pot ! in 
+    interface  ! in :libCH5Pot
+        subroutine mycalcpot(x,nwalk,v) ! in :libCH5Pot:fullpot.f
+            double precision dimension(nwalk,6,3),intent(in) :: x
+            integer, optional,intent(in),check(shape(x,0)==nwalk),depend(x) :: nwalk=shape(x,0)
+            double precision dimension(nwalk),intent(out),depend(nwalk) :: v
+        end subroutine mycalcpot
+        subroutine getpot(x,r,epot) ! in :libCH5Pot:fullpot.f
+            double precision dimension(6,3) :: x
+            double precision :: r
+            double precision :: epot
+        end subroutine getpot
+        function sw(a,b,x) ! in :libCH5Pot:fullpot.f
+            double precision :: a
+            double precision :: b
+            double precision :: x
+            double precision :: sw
+        end function sw
+        subroutine getlr(r,rh2,theta,elr) ! in :libCH5Pot:fullpot.f
+            double precision :: r
+            double precision :: rh2
+            double precision :: theta
+            double precision :: elr
+        end subroutine getlr
+        subroutine geth2pot(xyz1,v) ! in :libCH5Pot:fullpot.f
+            double precision dimension(2,3) :: xyz1
+            double precision :: v
+        end subroutine geth2pot
+        subroutine getfit(xn,f0) ! in :libCH5Pot:fullpot.f
+            double precision dimension(3,6) :: xn
+            double precision :: f0
+        end subroutine getfit
+        subroutine getd0(xn,dc0,dc1,dw0,dw1,d0,r0) ! in :libCH5Pot:fullpot.f
+            double precision dimension(3,6) :: xn
+            double precision :: dc0
+            double precision :: dc1
+            double precision :: dw0
+            double precision :: dw1
+            double precision dimension(6,6) :: d0
+            double precision dimension(6,6) :: r0
+        end subroutine getd0
+        subroutine getvec(m,d,vec) ! in :libCH5Pot:fullpot.f
+            integer, optional,check(len(vec)>=m),depend(vec) :: m=len(vec)
+            double precision dimension(6,6) :: d
+            double precision dimension(m) :: vec
+        end subroutine getvec
+        subroutine getrvec(m,r,vec) ! in :libCH5Pot:fullpot.f
+            integer, optional,check(len(vec)>=m),depend(vec) :: m=len(vec)
+            double precision dimension(6,6) :: r
+            double precision dimension(m) :: vec
+        end subroutine getrvec
+        subroutine getch3pot(xyz1,v) ! in :libCH5Pot:fullpot.f
+            double precision dimension(4,3) :: xyz1
+            double precision :: v
+        end subroutine getch3pot
+        subroutine cspline(x,y0,y90,yq) ! in :libCH5Pot:fullpot.f
+            double precision :: x
+            double precision :: y0
+            double precision :: y90
+            double precision :: yq
+        end subroutine cspline
+        subroutine spline(x,y,n,yp1,ypn,y2) ! in :libCH5Pot:fullpot.f
+            double precision dimension(n) :: x
+            double precision dimension(n),depend(n) :: y
+            integer, optional,check(len(x)>=n),depend(x) :: n=len(x)
+            double precision :: yp1
+            double precision :: ypn
+            double precision dimension(n),depend(n) :: y2
+        end subroutine spline
+        subroutine splint(xa,ya,y2a,n,x,y) ! in :libCH5Pot:fullpot.f
+            double precision dimension(n) :: xa
+            double precision dimension(n),depend(n) :: ya
+            double precision dimension(n),depend(n) :: y2a
+            integer, optional,check(len(xa)>=n),depend(xa) :: n=len(xa)
+            double precision :: x
+            double precision :: y
+        end subroutine splint
+        subroutine calcr(x,xch3,xh2a,dist,h2dist,theta) ! in :libCH5Pot:fullpot.f
+            double precision dimension(3,6) :: x
+            double precision dimension(4,3) :: xch3
+            double precision dimension(2,3) :: xh2a
+            double precision :: dist
+            double precision :: h2dist
+            double precision :: theta
+        end subroutine calcr
+        subroutine calcdist(x1,x2,dist) ! in :libCH5Pot:fullpot.f
+            double precision dimension(3) :: x1
+            double precision dimension(3) :: x2
+            double precision :: dist
+        end subroutine calcdist
+        subroutine calcangle(a,b,c,theta) ! in :libCH5Pot:fullpot.f
+            double precision :: a
+            double precision :: b
+            double precision :: c
+            double precision :: theta
+        end subroutine calcangle
+        subroutine mycalcpot(x,v,nwalk) ! in :libCH5Pot:mycalcpot.f
+            double precision dimension(nwalk,6,3),intent(in) :: x
+            double precision dimension(nwalk),intent(out),depend(nwalk) :: v
+            integer, optional,intent(in),check(shape(x,0)==nwalk),depend(x) :: nwalk=shape(x,0)
+        end subroutine mycalcpot
+    end interface 
+end python module libCH5Pot
+
+! This file was auto-generated with f2py (version:2).
+! See http://cens.ioc.ee/projects/f2py2e/

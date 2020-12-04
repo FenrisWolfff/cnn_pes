@@ -14,6 +14,12 @@ from pyvibdmc import potential_manager as pm
 
 
 # In[ ]:
+from tensorflow.compat.v1 import ConfigProto
+from tensorflow.compat.v1 import InteractiveSession
+
+config = ConfigProto()
+config.gpu_options.allow_growth = True
+session = InteractiveSession(config=config)
 
 
 if __name__ == '__main__': #if using multiprocessing on windows / mac, you need to encapsulate using this line
@@ -36,7 +42,7 @@ if __name__ == '__main__': #if using multiprocessing on windows / mac, you need 
                            [-0.45344658,  1.75233806,  0.        ],
                            [ 0.        ,  0.        ,  0.        ]]) * 1.01
 
-    for sim_num in [4]:
+    for sim_num in [5]:
         myDMC = dmc.DMC_Sim(sim_name=f"h2o_nn_{sim_num}",
                               output_folder="h2o_nn_dmc_output",
                               weighting='discrete', #or 'continuous'. 'continuous' keeps the ensemble size constant.
