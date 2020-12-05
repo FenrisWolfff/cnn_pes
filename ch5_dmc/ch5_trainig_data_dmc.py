@@ -14,7 +14,7 @@ if __name__ == '__main__':
     ch5_pot = pm.Potential(potential_function=pot_func,
                           python_file=py_file,
                           potential_directory=pot_dir,
-                          num_cores=multiprocessing.cpu_count())
+                          num_cores=24)
 
 
     ch5_coord_raw = np.array([[ 3.64370000e-05, 2.61250000e-04, 2.05490000e-05],
@@ -23,7 +23,7 @@ if __name__ == '__main__':
                     [ 1.18207493e+00, 1.87991209e-01, 9.14499999e-06],
                     [-4.36525904e-01, -3.33258609e-01, -9.39243426e-01],
                     [-4.36588351e-01, -3.33182565e-01, 9.39259010e-01]])
-    ch5_coord = Constants.convert(ch5_coord_raw, 'angstrom', to_AU=True)*1.1
+    ch5_coord = Constants.convert(ch5_coord_raw, 'angstroms', to_AU=True)*1.1
     print(ch5_coord)
     atoms = ['C','H','H','H','H','H']
     masses = [Constants.mass(a)/5 for a in atoms]
@@ -40,8 +40,8 @@ if __name__ == '__main__':
                               desc_wt_steps=100, #number of time steps you allow for descendant weighting per wave function
                               atoms=atoms,
                               delta_t=1, #the size of the time step in atomic units
-                              potential=water_pot,
-                              start_structures=np.expand_dims(water_coord,axis=0), #can provide a single geometry, or an ensemble of geometries
+                              potential=ch5_pot,
+                              start_structures=np.expand_dims(ch5_coord,axis=0), #can provide a single geometry, or an ensemble of geometries
                               masses=masses, #can put in artificial masses, otherwise it auto-pulls values from the atoms string
                               DEBUG_save_training_every=2000
         )
