@@ -24,8 +24,8 @@ from try_descriptors import *
 
 def vectorize(clmat):
     tril_map = 1 - np.tril(np.ones((6,6)))
-    cleanmat = np.multiply(clmat, tril_map).flatten()
-    return cleanmat[cleanmat != 0]
+    indices = np.argwhere(tril_map==1)
+    return clmat[:,indices[:,0],indices[:,1]]
 
 def normalize(vec, mx, mn):
     return 2*(vec-mn)/(mx-mn) - 1
@@ -49,7 +49,7 @@ def ch5_pot(cds):
     model.load_weights('ch5_3x128.h5')
     
     cds= coulomb_it(cds)
-    cds = np.array([vectorize(mat) for mat in cds])
+    cds = vectorize(cds)
     cds = normalize(cds, 6, 0)
     pots_wn = (10**model.predict(cds)).flatten()
     return Constants.convert(pots_wn, 'wavenumbers', to_AU=True)

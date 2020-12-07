@@ -19,7 +19,7 @@ if __name__ == '__main__':
     ch5_pot = pm.Potential(potential_function=pot_func,
                           python_file=py_file,
                           potential_directory=pot_dir,
-                          num_cores=24)
+                          num_cores=8)
 
 
     ch5_coord_raw = np.array([[ 3.64370000e-05, 2.61250000e-04, 2.05490000e-05],

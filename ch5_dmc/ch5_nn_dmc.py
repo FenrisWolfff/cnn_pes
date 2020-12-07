@@ -22,7 +22,7 @@ if __name__ == '__main__': #if using multiprocessing on windows / mac, you need 
     ch5_pot = pm.Potential(potential_function=pot_func,
                           python_file=py_file,
                           potential_directory=pot_dir,
-                          num_cores=24)
+                          num_cores=1)
 
     #optional num_cores parameter for multiprocessing, should not exceed the number of cores on the CPU
     #your machine has. Can use multiprocessing.cpu_count()
