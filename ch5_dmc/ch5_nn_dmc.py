@@ -13,22 +13,13 @@ from pyvibdmc.simulation_utilities import *
 from pyvibdmc import potential_manager as pm
 
 
-# In[ ]:
-from tensorflow.compat.v1 import ConfigProto
-from tensorflow.compat.v1 import InteractiveSession
-
-config = ConfigProto()
-config.gpu_options.allow_growth = True
-session = InteractiveSession(config=config)
-
-
 if __name__ == '__main__': #if using multiprocessing on windows / mac, you need to encapsulate using this line
     pot_dir = '/' #this directory is part of the one you copied that is outside of pyvibdmc.
     py_file = 'ch5_nn_pot.py'
     pot_func = 'ch5_pot' # def water_pot(cds) in h2o_potential.py
 
     #The Potential object assumes you have already made a .so file and can successfully call it from Python
-    water_pot = pm.Potential(potential_function=pot_func,
+    ch5_pot = pm.Potential(potential_function=pot_func,
                           python_file=py_file,
                           potential_directory=pot_dir,
                           num_cores=24)
@@ -46,7 +37,7 @@ if __name__ == '__main__': #if using multiprocessing on windows / mac, you need 
                     [-4.36588351e-01, -3.33182565e-01, 9.39259010e-01]])
     ch5_coord = Constants.convert(ch5_coord_raw, 'angstroms', to_AU=True)*1.1
 
-    for sim_num in [5]:
+    for sim_num in range(5):
         myDMC = dmc.DMC_Sim(sim_name=f"ch5_nn_{sim_num}",
                               output_folder="ch5_nn_dmc_output",
                               weighting='discrete', #or 'continuous'. 'continuous' keeps the ensemble size constant.

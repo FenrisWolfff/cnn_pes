@@ -34,7 +34,7 @@ def normalize(vec, mx, mn):
 def ch5_pot(cds):
     model = tf.keras.Sequential(
     [
-        tf.keras.Input(shape=(3,)),
+        tf.keras.Input(shape=(15,)),
         Dense(128, activation=tf.nn.swish),
         Dense(128, activation=tf.nn.swish),
         Dense(128, activation=tf.nn.swish),
